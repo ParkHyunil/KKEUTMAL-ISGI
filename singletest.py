@@ -11,16 +11,19 @@ class Server:
     def main(self):
         conn, addr = self.server.accept()
         name = conn.recv(1024).decode()
-        print(name + "님이 입장하셨습니다.")
-        first = input("시작단어를 입력하세요")
+        print(name + "님이 입장하셨습니다.", addr)
+        first = input("시작단어를 입력하세요 : ")
         conn.send(first.encode())
         print("===== 게임을 시작하지 =====")
         print(first)
         while True:
             word = conn.recv(1024).decode()
             print("-> " + word)
-            word = input("-> ")
-            conn.send(word.encode())
+            next_word = input("-> ")
+            while next_word[0] != word[-1]:
+                print("다시 입력하세요.")
+                next_word = input("-> ")
+            conn.send(next_word.encode())
             if not word:
                 break
         conn.close()

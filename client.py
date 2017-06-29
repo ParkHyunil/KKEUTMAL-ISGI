@@ -2,6 +2,10 @@ from socket import socket
 import sys
 
 class Finder:
+    """
+    txt파일을 소스로 하여 사전을 만드는 예시임
+    여러분의 상상력으로 이부분을 만들어서 1등을 해보세요
+    """
     def __init__(self, filename):
         self.dic = []
         self.load(filename)
@@ -12,15 +16,19 @@ class Finder:
                 return next_word
 
     def load(self, filename):
-        source = open(filename+".txt", 'r')
-        lines = source.readlines()
-        for line in lines:
-            self.dic += line.split()
-        source.close()
+        try:
+            source = open(filename+".txt", 'r')
+        except:
+            print("파일이 존재하지 않습니다.")
+        else:
+            lines = source.readlines()
+            for line in lines:
+                self.dic += line.split()
+            source.close()
 
 class Client(Finder):
     def __init__(self, name: str, filename: str, host="127.0.0.1", port=5005):
-        super().__init__(self, filename)
+        super().__init__(filename)
         self.host = host
         self.port = port
         self.server = socket()
@@ -45,4 +53,8 @@ class Client(Finder):
         self.server.send(data.encode())
 
 if __name__ == '__main__':
-    Client(sys.argv[1], sys.argv[2]).main()
+    try:
+        Client(sys.argv[1], sys.argv[2]).main()
+    except:
+        print("사용법 : python3 client.py <username> <filename>")
+

@@ -1,4 +1,5 @@
 from socket import socket
+from tkinter import *
 
 class Server:
     def __init__(self, host="127.0.0.1", port=5005, first="정보보안"):
@@ -44,3 +45,7 @@ class User:
 
 if __name__ == '__main__':
     Server().main()
+
+
+
+
