@@ -5,7 +5,7 @@ KKEUTMAL-ISGI
 
 테스트(사람 vs 컴퓨터) 하는법  
 ```
-$ python3 singleplay.py
+$ python3 singletest.py
 ```
 새창 띄우고
 ```
